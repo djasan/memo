@@ -1,0 +1,152 @@
+Découvrez les tableaux en JavaScript
+
+Si vous manipulez des données similaires ou qui partagent la même thématique, il est préférable de les regrouper dans un tableau, plutôt que de les stocker individuellement dans des variables différentes. Cela vous permet de les retrouver en un seul endroit, et de limiter le nombre de variables dans votre code.
+Un tableau en JavaScript est donc un objet qui permet de lister plusieurs variables ou valeurs, et de les regrouper.
+Déclarez un tableau en JavaScript
+
+Pour déclarer un tableau en JavaScript, vous devez utiliser les crochets  [ ]  . Chaque valeur contenue dans le tableau est séparée par une virgule  , 
+const maCollectionDeFilms = ["Titanic", "Jurassic Park", "Le Seigneur des Anneaux"]
+
+ stocker des variables dans votre tableau :
+const monFilmPrefere = "Titanic"
+const monPremierFilm = "Le Seigneur des Anneaux"
+
+const maCollectionDeFilms = [monFilmPrefere, monPremierFilm]
+
+
+
+Pour accéder à un élément de votre tableau, vous devez utiliser les crochets, et mettre entre crochets le numéro de la case que vous voulez regarder. La première case du tableau correspond à la case numéro zéro.
+
+    Pour accéder au contenu de cette case, vous écrirez donc :
+
+// maCollectionDeFilms vaut ["Titanic", "Le Seigneur des Anneaux"]
+
+
+let premierFilmDuTableau = maCollectionDeFilms[0]
+
+
+Pour connaître le nombre d’éléments que contient votre tableau, vous devez accéder à la propriétélength, en utilisant le point  .  , comme pour les objets. Cette propriété est préétablie par JavaScript. Elle est donc automatiquement disponible pour tous les tableaux. Pratique !
+
+    Imaginons que vous vouliez connaître le nombre total de films que vous possédez dans votre collection. Vous écrirez  :
+const maCollectionDeFilms = ["Titanic", "Le Seigneur des Anneaux"]
+const nombreDeFilms = maCollectionDeFilms.length
+console.log(nombreDeFilms)
+// nombreDeFilms vaut 2
+const maCollectionDeFilms = ["Titanic", "Le Seigneur des Anneaux"]
+const nombreDeFilms = maCollectionDeFilms.length
+console.log(nombreDeFilms)
+// nombreDeFilms vaut 2
+
+Les tableaux sont des conteneurs, comme les objets que nous avons vus dans le chapitre précédent. Pour effectuer des actions sur les données stockées dans votre tableau (ajouter, supprimer des données…), vous utiliserez des méthodes.
+
+Les méthodes s’utilisent avec des parenthèses  ( )  . À l’intérieur de ces parenthèses vous pouvez passer des valeurs, c'est-à-dire des données, qui serviront à la méthode pour modifier les données de votre tableau. En réalité, vous avez déjà utilisé une méthode fournie par JavaScript : console.log() ! 
+Ajoutez des données grâce à la méthode push
+
+Pour ajouter des données à un tableau, vous devez utiliser la méthode push en lui indiquant la valeur que vous souhaitez ajouter.
+
+    Si vous voulez ajouter Retour vers le futur à votre liste de films, vous écrirez :
+
+
+let mesFilms = ["Titanic", "Jurassic Park"]
+mesFilms.push("Retour vers le futur")
+
+console.log(mesFilms)
+// mesFilms vaut ["Titanic", "Jurassic Park", "Retour vers le Futur"]
+
+
+Pour supprimer la dernière donnée de votre tableau, vous pouvez utiliser la méthode pop sans avoir besoin de passer de valeurs (c'est-à-dire, sans rien écrire entre les parenthèses).
+
+    Si vous voulez retirer Retour vers le futur de votre liste de films, vous écrirez :
+
+let mesFilms = ["Titanic", "Jurassic Park", "Retour vers le futur"]
+mesFilms.pop()
+
+// mesFilms vaut ["Titanic", "Jurassic Park"]
+Distinguez les copies par “valeur” et par “référence”
+La copie par valeur
+
+Lorsqu’on programme, il arrive parfois que l’on veuille dupliquer une variable. C’est le cas lorsque l’on doit sauvegarder une valeur avant de la modifier, par exemple. Pour cela, le plus simple est de copier le contenu d’une variable à l’intérieur d’une autre variable.
+
+Mais que se passe-t-il en réalité lorsque nous effectuons cette opération 
+// Copie par valeur
+let variableSimple1 = 25
+let variableSimple2 = variableSimple1
+
+cela va dépendre du type de la variable. Si variable2 est un type simple (boolean, number ou string), alors le contenu sera dupliqué.
+
+Souvenez-vous, dans le deuxième chapitre du cours, je vous expliquais que, lorsqu’on crée une variable, on lui attribue une étiquette. Pour reprendre notre métaphore de l’armoire, ce qui est dans le tiroir variable1 va être dupliqué, et la copie sera mise dans variable2. Au final, nous aurons deux tiroirs indépendants avec chacun une valeur à l’intérieur.
+
+C’est ce qu’on appelle la copie par valeur. Nous avons copié le contenu d’une variable à l’intérieur d’une autre variable. Nous avons donc deux variables indépendantes.
+La copie par référence
+
+Imaginez maintenant que vous vouliez copier une variable qui contient un contenu de type “complexe” :  un objet ou un tableau, par exemple. Dans ce cas, JavaScript fait une copie par référence.
+let variableComplexe1 = ['pomme', 'cerise']
+let variableComplexe2 = variableComplexe1
+
+
+Eh bien non, car JavaScript a pensé à tout ! 😃 Vous n’aurez donc qu’à utiliser un spread operator. Comme le  ++  que nous avons déjà croisé, c’est un opérateur qui nous permet de faire automatiquement la copie, et cet opérateur s’écrit….
+
+////////////////////
+// Copie par valeur
+////////////////////
+let variableSimple1 = 25
+let variableSimple2 = variableSimple1
+
+variableSimple2 = 30
+
+// Le console.log va afficher 25, le fait d’avoir changé la valeur de variableSimple2 ne change rien pour variableSimple1
+console.log("variableSimple1", variableSimple1)
+console.log("variableSimple2", variableSimple2)
+
+///////////////////////
+// Copie par référence
+///////////////////////
+let variableComplexe1 = ['pomme', 'cerise']
+let variableComplexe2 = variableComplexe1
+let variableComplexe3 = [...variableComplexe1];
+
+variableComplexe2.push('poire')
+
+// Le console.log va afficher pomme cerise ET poire. On a modifié la seconde variable, mais le contenu de la première a été changé aussi, parce que c’est le même contenu.
+console.log('variableComplexe1', variableComplexe1)
+console.log('variableComplexe2', variableComplexe2)
+console.log('variableComplexe3', variableComplexe3)
+Déclarez les morceaux de votre playlist
+
+Commençons par faire un inventaire des CD en votre possession.
+
+    Déclarez un tableau playlist qui contiendra trois de vos morceaux préférés.
+
+    Stockez le nombre de morceaux disponibles dans une variable totalMorceaux.
+
+Ajoutez les morceaux de vos amis
+
+Pour plaire à tout le monde, vous décidez de laisser vos amis choisir deux morceaux supplémentaires pour compléter votre collection.
+
+    Ajoutez deux morceaux au tableau playlist de manière à porter le total à cinq morceaux.
+
+Enlevez le dernier morceau de votre playlist
+
+Malheureusement, certains ne sont pas d’accord avec le dernier morceau ajouté. Il va falloir faire du tri ! 😱
+
+    Supprimez le dernier morceau ajouté à votre collection.
+let playlist = ["A kind of magic", "We are the champions", "The show must go on"]
+
+playlist.push("Innuendo")
+playlist.push("Radio Gaga")
+
+playlist.pop()
+
+console.log(playlist)
+    Un tableau est un conteneur qui permet de regrouper plusieurs valeurs ou variables.
+
+    Un tableau possède une propriété length qui permet de connaître le nombre de données contenues dans un tableau.
+
+    Une méthode s’utilise avec des parenthèses  ( )  , et permet d’interagir avec le contenu du tableau. Il existe de nombreuses méthodes différentes mises à disposition par le langage.
+
+    Lorsqu’on copie une variable simple, JavaScript réalise une copie par valeur (la valeur est dupliquée).
+
+    Lorsqu’on copie une variable complexe, JavaScript réalise une copie par référence (les deux variables pointent sur la même valeur).
+
+
+

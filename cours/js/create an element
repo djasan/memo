@@ -1,0 +1,157 @@
+Nous savons maintenant comment modifier un élément existant. Mais comment créer un nouvel élément dans une page web ? La façon de faire est toujours la même : d’abord créer l’élément, puis le lier à un élément déjà existant de la page.
+
+Pour créer nos éléments, là encore JavaScript nous propose plusieurs manières de faire. Nous en aborderons deux dans ce chapitre :
+
+    la méthode createElement ;
+
+    la propriété innerHTML. 
+
+Créez une nouvelle balise grâce à createElement
+Utilisez la méthode CreateElement
+
+CreateElement est une méthode fournie par JavaScript, accessible depuis document. Elle permet de créer n’importe quelle balise :
+
+let nouvelElement = document.createElement("div");
+
+Ici, vous pouvez remplacer div par le nom de balise que vous désirez, section, p, h1, etc. Une fois cette balise créée, vous pouvez la configurer avec les méthodes que nous avons vues dans le chapitre précédent. 
+
+Dans nouvelElement, nous aurons un objet HTMLElement qui représente la balise que nous avons créée. 
+Insérez votre balise dans la page
+
+Une fois l’élément créé, il n'apparaît pas encore dans la page. Pour que cette nouvelle balise apparaisse, nous devons l’insérer dans l’arbre DOM afin que JavaScript sache exactement à quel endroit il faudra mettre l’élément. Pour cela, nous devons : 
+
+    déterminer quel sera l’élément parent ;
+
+    utiliser appendChild (littéralement en anglais : “ajouter un enfant”).
+
+// Récupérer un élément parent existant
+
+let parentElement = document.getElementById("conteneur");
+
+
+// Ajouter le nouvel élément au parent
+
+parentElement.appendChild(nouvelElement);
+
+Ici, j’ai ajouté une balise div à un élément que j’ai récupéré grâce à getElementById.
+
+Il existe d’autres méthodes pour insérer des éléments dans l’arbre DOM, comme prepend, before ou insertAdjacentElement. N’hésitez pas à consulter la documentation pour en savoir plus.
+Utilisez la propriété innerHTML pour insérer du HTML
+
+Avec la méthode createElement, nous créons un élément que nous pouvons modifier et insérer dans le HTML. Mais que se passe-t-il quand nous devons créer et imbriquer de nombreux éléments ?
+
+    Regardons ensemble avec cet exemple plus complexe :
+
+// Définition des variables contenant le texte du titre et du paragraphe
+
+let contenuTitre = "Azertype"
+
+let contenuParagraphe = "L'application pour apprendre à taper plus vite !"
+
+
+// Création d'un div avec createElement. Dans cette div, on va créer un titre h1 et un paragraphe p
+
+let nouvelleDiv = document.createElement("div")
+
+let nouveauTitre = document.createElement("h1")
+
+let nouveauParagraphe = document.createElement("p")
+
+
+// On ajoute du texte dans le titre et le paragraphe
+
+nouveauTitre.textContent = contenuTitre
+
+nouveauParagraphe.textContent = contenuParagraphe
+
+
+// On ajoute le titre et le paragraphe dans la div
+
+nouvelleDiv.appendChild(nouveauTitre)
+
+nouvelleDiv.appendChild(nouveauParagraphe)
+
+
+// On ajoute la div dans le body
+
+let body = document.querySelector("body")
+
+body.appendChild(nouvelleDiv)
+
+Dans le code ci-dessus :
+
+    je crée deux variables qui vont contenir le texte du titre et du paragraphe ;
+
+    je crée trois éléments, une div, un titre et un paragraphe ;
+
+    j’insère du texte créé avec les variables dans le titre et le paragraphe ;
+
+    j’insère du titre et du paragraphe en tant qu’enfants de la div ;
+
+    j’insère une div en tant qu’enfant de la balise body. 
+
+Cela fonctionne parfaitement, et donne le résultat suivant :
+Capture d'écran. Sous l'inspecteur, de body est surligné en bleu et les détails du body sont affichés.
+
+Utilisez l’interpolation pour générer du HTML
+
+Pour générer le HTML, nous pouvons utiliser la concaténation, comme nous l’avons vu au début de ce cours avec + .  Dans ce chapitre, l’heure est venue de découvrir une nouvelle méthode plus efficace encore : l’interpolation.
+
+L’interpolation ? 🤨 Ça marche comment ?
+
+L’interpolation consiste à entourer la chaîne de caractères avec des backticks : `  . Ce caractère correspond à l’accent du “è”, mais sans le e en dessous 🙂. Ainsi, quand nous voulons insérer une variable, il suffit de l’entourer avec${} .
+
+    Voici un exemple :
+
+let contenuTitre = "Azertype"
+
+let contenuParagraphe = "L'application pour apprendre à taper plus vite !"
+
+
+let div = `
+
+    <div>
+
+        <h1>${contenuTitre}</h1>
+
+        <p>${contenuParagraphe}</p>
+
+    </div>
+
+    `;
+
+OK je vois…. Mais du coup pourquoi utiliser ça plutôt que l’opérateur + ?
+
+Car l’interpolation est plus sécurisée que la concaténation simple avec  +  , et souvent plus facile à lire. N’hésitez donc pas à vous en servir à chaque fois que vous en avez besoin !
+Insérez votre HTML grâce à innerHTML
+
+Maintenant que le code HTML est généré, comme avec createElement, nous devons l’insérer dans un élément existant de la page. Pour cela, on choisit la balise qui va contenir notre code HTML, et on met simplement ce code HTML dans la propriété innerHTML :
+
+let body = document.querySelector("body")
+
+body.innerHTML = div
+
+Et voilà, le tour est joué ! 🥳
+Récapitulons en vidéo
+
+Retrouvez les démonstrations de ce chapitre dans la vidéo ci-dessous :
+À vous de jouer !
+
+Pour l’instant, dans notre application, le résultat apparaît uniquement dans la console. Le but ici va être de mettre à jour la page HTML après avoir joué, de manière à afficher le résultat de la partie.
+
+Je vous invite à utiliser ce projet sur GitHub, qui reprend ce que nous avons réalisé ensemble. J’y ai intégré une maquette HTML/CSS que vous pourriez cloner. Cependant, vous pouvez également reprendre votre code et développer le projet vous-même, si vous voulez augmenter le niveau de difficulté de l’exercice.
+Mettez à jour le HTML
+
+Modifiez la fonction afficherResultat. Cette fonction ne devra plus afficher le résultat en console, mais directement sur la page HTML sous la forme “score / nbMotsProposes”.
+Corrigé
+
+Vous pouvez vérifier votre travail en consultant le corrigé et la vidéo ci-dessous : 
+En résumé
+
+    Créez un nouvel élément HTML : 
+
+        en utilisant la méthode createElement puis en liant l’élément créé à la page grâce à appendChild ;
+
+        en utilisant la propriété innerHTML pour insérer directement du HTML sous forme de texte à l’intérieur d’une balise.
+
+    L’interpolation permet de générer facilement des chaînes de caractères complexes en utilisant des backticks. 

@@ -1,0 +1,116 @@
+<h1>Image gallery example</h1>
+
+<div class="full-img">
+  <img class="displayed-img" src="images/pic1.jpg" />
+  <div class="overlay"></div>
+  <button class="dark">Darken</button>
+</div>
+
+<div class="thumb-bar"></div>
+Votre JavaScript doit:
+
+    Itérer toutes les images dans une boucle, et pour chacune d'elle, insérer un élément <img> à l'intérieur de thumb-bar <div> qui va incorporer cette image dans la page.
+    Associer un gestionnaire d'événement onclick à chaque <img> à l'intérieur de thumb-bar <div> pour que, lorsqu'elles sont cliquées, l'image correspondante soit affichée dans l'élément displayed-img <img>.
+    Associer un gestionnaire d'événement onclick au <button> pour que, lorsqu'il est cliqué, un effet assombrissant soit appliqué à l'image grandeur nature. Losrqu'il est cliqué à nouveau, l'effet doit disparaitre.
+const monImage = document.querySelector("img");
+
+let maRequete = new Request("fleurs.jpg");
+
+fetch(maRequete)
+  .then(function (reponse) {
+    if (!response.ok) {
+      throw new Error(`erreur HTTP! statut: ${reponse.status}`);
+    }
+    return reponse.blob();
+  })
+  .then(function (reponse) {
+    let URLobjet = URL.createObjectURL(reponse);
+    monImage.src = URLobjet;
+  });
+const monImage = document.querySelector('img');
+
+let mesEntetes = new Headers();
+mesEntetes.append('Content-Type', 'image/jpeg');
+
+const monInit = { method: 'GET',
+               headers: mesEntetes,
+               mode: 'cors',
+               cache: 'default' };
+
+let maRequete = new Request('fleurs.jpg');
+
+fetch(maRequete, monInit).then(function(reponse) {
+  ...
+});
+const monInit = {
+  method: "GET",
+  headers: {
+    "Content-Type": "image/jpeg",
+  },
+  mode: "cors",
+  cache: "default",
+};
+
+let maRequete = new Request("fleurs.jpg", monInit);
+
+
+
+
+
+const nom = "Miriam";
+const salutation = `Bonjour, je m'appelle ${nom} !`;
+console.log(salutation);
+// "Bonjour, je m'appelle Miriam !"
+
+function creerSalutation(nom) {
+  return `Bonjour, je m'appelle ${nom} !`;
+}
+
+const nom = "Miriam";
+const salutation = creerSalutation(nom);
+console.log(salutation);
+// "Bonjour, je m'appelle Miriam !"
+
+
+<label for="quota">Quantité de nombres premiers :</label>
+<input type="text" id="quota" name="quota" value="1000000" />
+
+<button id="generer">Générer des nombres premiers</button>
+<button id="recharger">Recharger</button>
+
+<div id="output"></div>
+
+
+function genererNbPremiers(quota) {
+  function estPremier(n) {
+    for (let c = 2; c <= Math.sqrt(n); ++c) {
+      if (n % c === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const nbPremiers = [];
+  const maximum = 1000000;
+
+  while (nbPremiers.length < quota) {
+    const candidat = Math.floor(Math.random() * (maximum + 1));
+    if (estPremier(candidat)) {
+      nbPremiers.push(candidat);
+    }
+  }
+
+  return nbPremiers;
+document.querySelector("#generer").addEventListener("click", () => {
+  const quota = document.querySelector("#quota").value;
+  const nbPremiers = genererNbPremiers(quota);
+  document.querySelector(
+    "#output",
+  ).textContent = `Génération de ${quota} nombres premiers terminée !`;
+});
+
+document.querySelector("#recharger").addEventListener("click", () => {
+  document.location.reload();
+
+

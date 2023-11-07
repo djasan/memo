@@ -1,0 +1,192 @@
+.conteneur {
+    display: grid;
+}
+On va définir les colonnes et les rangées avec deux propriétés :
+
+    grid-template-columns pour le nombre de colonnes, et la largeur de chacune d'entre elles.
+
+    grid-template-rows pour le nombre de rangées, et la hauteur de chacune d'entre elles.
+<div class="conteneur">
+    <div class="box">🐸 Élément 1</div>
+    <div class="box">🦊 Élément 2</div>
+    <div class="box">🦄 Élément 3</div>
+    <div class="box">🐶 Élément 4</div>
+    <div class="box">🐨 Élément 5</div>
+    <div class="box">🐒 Élément 6</div>
+    <div class="box">🦆 Élément 7</div>
+    <div class="box">🐙 Élément 8</div>
+    <div class="box">🐋 Élément 9</div>
+</div>
+
+
+.box {
+  height: 150px;
+}
+.conteneur {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+}
+.conteneur {
+    display: grid;
+    grid-template-columns: 100px 300px 200px;
+}
+
+
+finissez vos rangées avec la propriété CSS grid-template-rows
+
+Passons maintenant à la propriété grid-template-rows. Et on fait bien attention à supprimer la hauteur fixe qu'on avait associée à la classe  .box :  height: 150px;  .
+
+Pourquoi il faut faire ça ? Je ne comprends pas.
+
+En fait, indiquer une hauteur avec la propriété  height  à  .box  a pour effet d'assigner une hauteur fixe pour tous les éléments de classe  .box  . Or, on peut avoir besoin de définir des hauteurs différentes aux rangées, ce qu'on va pouvoir spécifier avec  grid-template-rows  , en indiquant la hauteur de chacune, comme on l'a fait pour  grid-template-columns  :
+
+.conteneur {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 150px 200px;
+}
+.box {
+  height: 150px;
+}
+
+.conteneur {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 150px 200px;
+}
+
+
+
+
+.conteneur {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 150px 200px;
+    gap: 10px;
+}
+
+
+Aérez votre contenu avec la propriété CSS  gap
+
+La propriété CSS gap permet de créer des espacements entre vos éléments. Si vous voulez garder les mêmes distances entre les rangées et les colonnes sans avoir à vous compliquer la vie, vous précisez simplement une valeur.
+
+Jusqu'à maintenant, nous avons utilisé une unité en px pour définir les hauteurs et largeurs des rangées et colonnes. Mais il est également possible d'utiliser des em, rem, et des pourcentages.
+
+Et encore mieux : je vais vous montrer une unité qui est spécifique aux grids : les "fraction units", ou fr pour les intimes, qui représentent des parts de largeur dans les colonnes.
+.conteneur {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px 100px 200px;
+    gap: 10px;
+}
+
+
+.conteneur {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 50px 100px 200px;
+    grid-gap: 10px;
+}
+Définissez la taille des éléments de votre  grid
+Prenons notre première  div  :  .une.
+.une {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.une {
+    grid-column: 1 / 4;
+
+
+
+
+.deux {
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+}
+
+Pour cela, vous allez apprendre à maîtriser les propriétés liées à grid-column  et grid-row.
+.deux {
+    grid-row: 2 / 4;
+}
+
+Grilles CSS (CSS Grid)
+
+Le module CSS Grid layout (modèle de disposition en grille) est un module de la spécification CSS qui permet de créer des mises en page en divisant l'espace d'affichage en régions utilisables par une application ou en définissant des relations de taille, position et d'empilement entre les éléments HTML.
+
+Comme les tableaux, la grille permet d'aligner des éléments sous forme de colonnes et de lignes mais à la différence des tableaux, la grille n'a pas de structure de contenu. Ainsi, on peut créer de nombreuses mises en page qui n'auraient pas été possibles avec les tableaux. Ainsi, les éléments fils d'un conteneur en grille peuvent être positionnés afin qu'ils se chevauchent ou qu'ils se comportent comme des éléments positionnés.
+Un exemple simple
+
+Dans l'exemple qui suit, on montre comment utiliser une grille avec trois pistes en colonnes pour laquelle les nouvelles lignes créées mesureront au moins 100 pixels et auront au plus la taille automatique (définie par leur contenu). Les éléments sont placés sur la grille grâce aux numéros des lignes horizontales et verticales.
+HTML
+
+html
+
+<div class="wrapper">
+  <div class="one">Un</div>
+  <div class="two">Deux</div>
+  <div class="three">Trois</div>
+  <div class="four">Quatre</div>
+  <div class="five">Cinq</div>
+  <div class="six">Six</div>
+</div>
+
+CSS
+
+css
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.one {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+.two {
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+}
+.three {
+  grid-column: 1;
+  grid-row: 2 / 5;
+}
+.four {
+  grid-column: 3;
+  grid-row: 3;
+}
+.five {
+  grid-column: 2;
+  grid-row: 4;
+}
+.six {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+
+    Les CSS Grids sont complémentaires à Flexbox et permettent de créer facilement des mises en page plus élaborées que Flexbox, sans forcément avoir des éléments de la même taille.
+
+    Pour déclarer une grid, on déclare simplement  display: grid;  sur le conteneur : notre navigateur comprend tout de suite que nos éléments sont dans la grid.
+
+    On définit les colonnes avec grid-template-columns  et les rangées avec grid-template-rows : en fonction du nombre de valeurs passées, de nouvelles colonnes et rangées sont créées.
+
+    En plus des unités classiques  px  ,  em  ,  rem  et  %  , les  fr  sont encore plus simples, et permettent d'indiquer une fraction de la grille.
+
+    gap  permet d'espacer les éléments entre eux.
+
+    Les grids créent implicitement des lignes horizontales et verticales délimitant les différentes rangées et colonnes.
+
+    Chaque élément peut avoir :
+
+        son propre point de départ horizontal avec  grid-row-start  ;
+
+        son point d'arrivée horizontal avec  grid-row-end  ;
+
+        son point de départ vertical avec  grid-column-start  ;
+
+        et son point d'arrivée vertical avec  grid-column-end  .
+
+

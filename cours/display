@@ -1,0 +1,208 @@
+La propriété CSS display permet de transformer n'importe quel élément de votre page, d'un type vers un autre. Avec cette propriété, on peut par exemple imposer à des liens (originellement de type  inline  ) d'apparaître sous forme de type  block  
+Cachez vos éléments avec  display: none;
+.secret {
+    display: none;
+}
+Syntaxe
+
+css
+
+/* Valeurs de type <display-outside> */
+display: block;
+display: inline;
+display: run-in;
+
+/* Valeurs de type <display-inside> */
+display: flow;
+display: flow-root;
+display: table;
+display: flex;
+display: grid;
+display: ruby;
+
+/* Combinaison de valeurs */
+/* <display-outside> et <display-inside> */
+display: block flow;
+display: inline table;
+display: flex run-in;
+
+/* Valeurs de type <display-listitem> */
+display: list-item;
+display: list-item block;
+display: list-item inline;
+display: list-item flow;
+display: list-item flow-root;
+display: list-item block flow;
+display: list-item block flow-root;
+display: flow list-item block;
+
+/* Valeurs de type <display-internal> */
+display: table-row-group;
+display: table-header-group;
+display: table-footer-group;
+display: table-row;
+display: table-cell;
+display: table-column-group;
+display: table-column;
+display: table-caption;
+display: ruby-base;
+display: ruby-text;
+display: ruby-base-container;
+display: ruby-text-container;
+
+/* Valeurs de type <display-box> */
+display: contents;
+display: none;
+
+/* Valeurs de type <display-legacy> */
+display: inline-block;
+display: inline-table;
+display: inline-flex;
+display: inline-grid;
+
+/* Valeurs globales */
+display: inherit;
+display: initial;
+display: unset;
+
+
+
+
+Positionnez vos éléments avec la propriété CSS  position
+
+Dans les méthodes que nous avons vues jusqu'à maintenant, le navigateur dispose les éléments afin qu'ils ne se superposent jamais. Ils font partie d'un flux normal. Mais nous allons maintenant voir une nouvelle propriété :position. Elle permet de positionner avec précision des éléments sur la page (et même parfois de les superposer).
+
+    Le positionnement relatif permet de décaler l'élément par rapport à sa position normale.
+
+    Le positionnement absolu permet de placer un élément n'importe où sur la page (en haut à gauche, en bas à droite, tout au centre, etc.).
+
+    D'autres types de positionnements comme fixed ou encore sticky, qui ont des comportements assez semblables, peuvent être utiles si l'on veut qu'un élément, tel que le menu de navigation par exemple, reste à l'écran.
+
+Le positionnement fonctionne aussi bien sur des balises qui sont  inline  que   block  . Mais dans les faits, vous verrez qu'on l'utilise bien plus souvent sur des balises  block  que sur des balises  inline  .
+
+Il faut d'abord faire son choix entre les trois modes de positionnement disponibles. Pour cela, on utilise la propriété CSS position.
+
+Regardons tout ça d'un peu plus près !
+Définissez un positionnement relatif avec  position: relative;
+
+Le positionnement relatif permet d'effectuer des ajustements : l'élément est décalé par rapport à sa position initiale.
+
+Prenons par exemple un texte dans lequel se trouve un lien. Pour commencer, on donne une couleur de fond au body, et on met le lien sur un fond blanc.
+
+Ici, on utilise position: relative;. Notre élément a alors un point d'origine : le point de coordonnées  (0, 0)  qui va nous permettre de le déplacer :
+
+
+
+Le point d'origine démarre depuis son coin supérieur gauche. C'est de là qu'on peut le déplacer pour créer un décalage.
+
+On accède alors à quatre propriétés CSS qui vont nous permettre de décaler notre élément :
+
+    left   : décalage depuis la gauche.
+
+    right  : décalage depuis la droite.
+
+    top  : décalage depuis le haut de notre élément.
+
+    bottom   : décalage depuis le bas de notre élément.
+
+Ainsi, si j'écris le CSS suivant :
+
+a {
+    background-color: white;
+    position: relative;
+    top: 6px;
+    left: 10px;
+}
+Définissez un positionnement absolu avec  position: absolute;
+
+Le positionnement absolu permet de placer un élément (réellement) n'importe où sur la page. Pour l'utiliser, on écrit tout simplement position: absolute;:
+
+a {
+    background-color: white;
+    position: absolute;
+    top: 6px;
+    left: 10px;
+}
+
+Donc quand j'utilise  left  ,  right  ,  top  et  bottom, mon élément va toujours se placer par rapport aux bords de la page ?
+
+Eh bien… pas nécessairement. Un élément  absolute  va se positionner par rapport au premier élément qu'il rencontre dans ses parents, et qui utilise lui-même la propriété  position . Donc si on veut placer un élément par-dessus un autre, il faudra que ce premier élément utilise aussi la propriété  position.
+
+Regardez un peu ce que cela donne :
+L'élément 1 est positionné en relative. L'élément 4 (avec les coordonnées top: 0 et left: 0) vient alors se positionner en haut à gauche de l'élément 2.
+
+La propriété position unset réinitialise la propriété afin que sa valeur soit la valeur héritée depuis l'élément parent, ou soit la valeur initiale (s'il n'y a pas d'héritage).
+
+Dans ce cas, vous pouvez utiliser la propriété z-index  pour indiquer quel élément doit apparaître au-dessus des autres : vous empilez vos éléments dans l'ordre souhaité ! L'élément ayant la valeur de  z-index  la plus élevée sera placé par-dessus les autres.
+
+Si j'écris le HTML :<div class="conteneur">
+    <div class="box une">Élément 1</div>
+    <div class="box deux">Élément 2</div>
+    <div class="box trois">Élément 3</div>
+<div>
+
+
+.conteneur {
+    position: relative;
+    height: 300px;
+    width: 300px;
+}
+
+.une {
+    background-color: #C2B0F9;
+    position: absolute;
+    left: 0;
+    top: 90px;
+}
+
+.deux {
+    background-color: #CBFCB9;
+    position: absolute;
+    right: 70px;
+    top: 0;
+}
+
+.trois {
+    background-color: #F2A3BB;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+}
+
+
+Bloquez un élément avec fixed ou sticky
+
+Le principe est exactement le même que pour le positionnement absolu sauf que, cette fois, le bloc se fige, même si on descend plus bas dans la page. Pour faire cela, il y a deux options possibles : attribuer la valeur  fixed  ou  sticky  à la propriété CSS  position  .
+Rendez un élément fixe avec  position: fixed;
+Rendez un élément fixe avec  position: fixed;
+
+En HTML, on écrit :
+
+<div class="box fixed">Élément fixed</div>
+
+et en CSS, on écrit :
+
+element {
+
+    position: fixed;
+
+    right: 0;
+
+    top: 0;
+
+}
+
+Vous voyez, avec la valeur  fixed  , l'élément fixe ne bouge pas.
+Rendez un élément adhérent avec  position: sticky;
+
+avec  <div class="box sticky">Élément sticky</div>
+
+element {
+
+    position: sticky;
+
+    top: 0;
+
+}
+
+Et c'est la même chose pour la valeur sticky: l'élément ne bouge pas

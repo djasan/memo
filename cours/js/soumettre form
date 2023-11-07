@@ -1,0 +1,147 @@
+Dans le chapitre précédent, nous avons constaté que les différents types de balises sont rangés à l’intérieur d’une balise plus générique : la balise form. Cette dernière est généralement associée à un bouton qui permet de valider le formulaire en envoyant un submit (ou soumission, en français).
+
+Dans ce chapitre, nous allons ajouter un formulaire à notre application pour permettre à l’utilisateur de communiquer son score à un ami. Pour y parvenir, nous aurons donc recours à l’événement submit ! Voici un aperçu de ce que nous devrions obtenir :
+
+                                              Capture d'écran du formulaire à réaliser. Il contient un titre, deux champs texte et adresse et un bouton envoyer.
+
+Mais avant de rentrer dans le vif du sujet, je vous propose de revenir sur le fonctionnement d’un site web, et les particularités de l'événement submit.
+Appréhendez le fonctionnement client/serveur
+
+Pour comprendre la particularité de l'événement submit, il est important de comprendre comment fonctionne un site web. 😉
+
+    Votre navigateur (Chrome ou Firefox, par exemple) est un client. Il envoie une requête HTTP à un serveur pour demander des ressources telles qu’une page HTML, un fichier CSS ou un script JavaScript.
+
+    Le serveur reçoit la requête et la traite à l’aide d’un langage “serveur” (PHP, Python, Node.js…), et retourne une réponse. 
+
+    Lorsque le navigateur reçoit le fichier, il l’interprète et affiche la page. 
+
+Le principe est le même lorsqu’une page HTML affiche un formulaire :
+
+    L'événement submit est lancé au clic sur le bouton “Envoyer”. 
+
+    Le navigateur envoie les données au serveur.
+
+    Le serveur les interprète, et retourne une nouvelle page à afficher. 
+
+Par conséquent, la page est rechargée au clic sur le bouton Envoyer.
+Illustration du fonctionnement d’un serveur HTTP en 7 étapes : depuis l'URL rentré par l'utilisateur dans le navigateur jusqu'au traitement des informations par le serveur.
+
+Ceci est le comportement par défaut du navigateur. Cependant, lorsque nous traitons nous-mêmes le contenu du formulaire en JavaScript, l’événement submit pose un problème. Étant donné que l’événement a envoyé des données et récupéré une réponse du serveur, il provoque un rechargement de la page. 😱
+
+Heuuu… En quoi c’est un problème ?
+
+Le rechargement de la page empêche l’exécution du code ! Pour traiter nous-mêmes le contenu du formulaire, nous devons donc empêcher ce comportement par défaut, et dire au navigateur “Inutile d’envoyer des données au serveur, nous allons gérer nous-mêmes cet événement submit”. 
+Empêchez le comportement par défaut de l'événement “submit”
+
+Nous l’avons vu, l’événement submit a ceci de particulier qu’il provoque un rechargement automatique de la page lorsqu’il est envoyé.
+
+    Voyons ensemble avec un exemple comment gérer ce comportement :
+
+<form>
+
+    <!-- champ nom -->
+
+    <label for="nom">Nom</label>
+
+    <input type="text" id="nom" name="nom" placeholder="Votre nom">
+
+
+    <!-- champ email -->
+
+    <label for="email">Email</label>
+
+    <input type="email" id="email" name="email" placeholder="Votre email">
+
+
+    <!-- bouton de validation -->
+
+    <button>Envoyer</button>
+
+</form>
+
+Lorsque l’on clique sur le bouton Envoyer, l’événement submit est envoyé, et le navigateur veut envoyer les données au serveur et réafficher la page. 
+
+Pour empêcher ce comportement par défaut, nous allons donc :
+
+    écouter cet événement submit ;
+
+    empêcher ce comportement grâce à la méthode preventDefault.
+
+    Voici un exemple :
+
+    const form = document.querySelector('form');
+
+
+    // Quand on submit
+
+    form.addEventListener("submit", (event) => {
+
+        // On empêche le comportement par défaut
+
+        event.preventDefault();
+
+        console.log("Il n’y a pas eu de rechargement de page");
+
+});
+
+Une fois que nous avons rédigé le preventDefault, nous pouvons traiter le contenu du formulaire. Par exemple, en affichant les valeurs du formulaire dans un console.log :
+
+form.addEventListener("submit", (event) => {
+
+    // On empêche le comportement par défaut
+
+    event.preventDefault();
+
+    console.log("Il n’y a pas eu de rechargement de page");
+
+
+    // On récupère les deux champs et on affiche leur valeur
+
+    const nom = document.getElementById("nom").value;
+
+    const email = document.getElementById("email").value;
+
+    console.log(nom);
+
+    console.log(email);
+
+});
+
+Ici, au clic sur Envoyer, la valeur du nom et de l’e-mail apparaît dans la console. Bien sûr, vous pouvez insérer ici le traitement de votre choix au lieu d’un console.log.
+Récapitulons en vidéo
+
+Retrouvez les démonstrations de ce chapitre dans la vidéo ci-dessous :
+À vous de jouer !
+
+Notre application est fonctionnelle. Notre objectif est maintenant de permettre à l’utilisateur de partager son score avec un ami.
+
+J’ai donc ajouté un bouton “Partager” à notre projet. Ainsi, au clic sur le bouton, une popup apparaît et affiche un formulaire.
+
+Capture d'écran de la pop up. Elle contient un titre, deux champs et un bouton
+
+Pour réaliser cet exercice :
+
+    écoutez l’événement submit sur ce nouveau formulaire, et empêchez le comportement par défaut de se produire ;
+
+    récupérez les valeurs des champs présents ;
+
+    créez une variable sujet et une variable message, et affichez-les dans la console ; 
+
+    utilisez la méthode afficherEmail que je vous ai préparée, avec les bons arguments pour afficher l’e-mail à envoyer, prérempli avec les bonnes informations. 
+
+Corrigé
+
+Vous pouvez vérifier votre travail en consultant le corrigé et la vidéo ci-dessous :
+En résumé
+
+    Un navigateur est un client HTTP. Il fait appel au serveur pour récupérer les informations sur la page qu’il veut afficher.
+
+    Lorsqu’un utilisateur valide un formulaire, l’événement submit est envoyé. 
+
+    Lorsqu'un événement submit est envoyé, par défaut, il provoque un appel au serveur. Cela génère un rechargement de la page qui empêche l'exécution du code.
+
+    Pour éviter ce comportement par défaut : 
+
+        écoutez l’événement submit ;
+
+        empêchez le comportement avec la méthode preventDefault.

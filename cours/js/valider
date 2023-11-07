@@ -1,0 +1,299 @@
+Notre application contient désormais un formulaire qui permet aux utilisateurs de saisir des données. Notre objectif est maintenant de pouvoir vérifier que l’utilisateur a saisi correctement ces données : 
+
+    Les champs requis sont-ils tous renseignés ?
+
+    L’e-mail saisi est-il correctement écrit ?
+
+Pour répondre à cette problématique dans ce chapitre, nous allons mettre en place des règles de validation, en allant du plus simple au plus complexe :
+
+    vérifier la valeur d’un champ pour les cas simples ;
+
+    définir des expressions régulières pour les cas plus complexes.
+
+C’est parti ! 🚀
+Vérifiez la valeur d’un champ
+
+Une règle de validation est une manière de s’assurer qu’un champ est correctement rempli. Pour y parvenir, l’option la plus simple est de s’assurer que le champ n’est pas vide.
+
+    Par exemple, le formulaire de notre application contient  un champ “nom”. Si l’utilisateur le laisse vide et que utilisons cette donnée pour envoyer un mail, notre destinataire ne pourra pas savoir qui est à l’origine de cet envoi !
+
+Pour éviter ce genre d’erreur, nous devons nous assurer que le champ est bien renseigné par l’utilisateur. Cette vérification peut être réalisée à deux étapes clés :
+
+    à l’envoi du formulaire ;
+
+    à la saisie de chaque champ du formulaire. 
+
+Vérifiez un champ à l’envoi du formulaire
+
+    Reprenons le code d’un formulaire très simple avec nos deux champs, nom et e-mail :
+
+<form>
+
+    <!-- champ nom -->
+
+    <label for="nom">Nom</label>
+
+    <input type="text" id="nom" name="nom" placeholder="Votre nom">
+
+
+    <!-- champ email -->
+
+    <label for="email">Email</label>
+
+    <input type="email" id="email" name="email" placeholder="Votre email">
+
+
+    <!-- bouton de validation -->
+
+    <button>Envoyer</button>
+
+</form>
+
+Pour vérifier si le champ “nom” n’est pas vide, à la soumission, nous allons donc :
+
+    écouter l’événement submit sur le formulaire ;
+
+    récupérer la valeur de ce champ ;
+
+    réaliser notre test.
+
+const form = document.querySelector('form');
+
+
+// Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
+
+form.addEventListener("submit", (event) => {
+
+    // On empêche le comportement par défaut
+
+    event.preventDefault();
+
+
+    // On fait la vérification.
+
+    const baliseNom = document.getElementById('nom');
+
+    const valeurNom = baliseNom.value;
+
+    if (valeurNom === "") {
+
+        console.log('Le champ nom est vide');
+
+    } else {
+
+        console.log('Le champ nom est rempli');
+
+    }
+
+});
+
+Dans ce code, j’ai  :
+
+    écouté l'événement submit sur le formulaire ;
+
+    fait un preventDefault pour éviter un rechargement de la page ;
+
+    vérifié la valeur du champ ;
+
+    affiché un message dans la console pour vérifier.
+
+Dans notre cas ici, si on rentre un espace dans le champ, il n’est pas vide, car il contient bien un caractère. Pour autant, on ne peut pas dire qu’il soit correctement rempli. C’est pourquoi la bonne pratique consiste à nettoyer les champs avant de les tester. En utilisant la méthode trim(), vous pouvez ainsi nettoyer le champ et supprimer automatiquement les espaces et autres tabulations autour de la chaîne à tester !
+Vérifiez un champ à la saisie d’un champ du formulaire
+
+Pour vérifier la valeur d’un champ à la saisie, le principe est le même. Nous allons écouter un événement. Deux types d'événements sont possibles dans ce cas :
+
+    l’événement input : il se déclenche à chaque fois que l’utilisateur tape une lettre dans le champ ;
+
+    l’événement change : il se déclenche quand l’utilisateur a fini de taper, et sélectionne un autre élément de la page.  
+
+    Voici un exemple avec change, mais n’hésitez pas à essayer input pour voir la différence de comportement.
+
+const baliseNom = document.getElementById('nom');
+
+baliseNom.addEventListener('change', (event) => {
+
+    const valeurNom = event.target.value;
+
+    if (valeurNom === "") {
+
+        console.log('Le champ nom est vide');
+
+    } else {
+
+        console.log('Le champ nom est rempli');
+
+    }
+
+});
+
+Ici j’écoute l’événement input qui va se produire à chaque fois que j’écris dans le champ baliseNom.
+Récapitulons en vidéo
+
+Vous pouvez revoir ces démonstrations dans la vidéo ci-dessous :
+Réalisez une validation complexe avec les expressions régulières
+
+Le test que nous avons réalisé était très simple : est-ce que le champ est vide ou non. Mais comment faire pour savoir si un texte correspond au format d’une adresse e-mail ? Dans ce cas, nous allons utiliser les expressions régulières !
+Découvrez les expressions régulières
+
+Le principe des expressions régulières est de décrire, dans un format précis, l’ensemble des chaînes de caractères possibles, puis de tester si la chaîne de caractères correspond à ce format. Les expressions régulières sont également appelées RegEx ou RegExp, pour “Regular Expression”, en anglais.
+
+    Illustrons avec un exemple pour rendre cela plus concret ! 😃 Imaginons que nous voulions vérifier qu’une chaîne de caractères ne contient que des lettres : pas de chiffre, pas d’espace.
+
+Dans ce cas, nous allons créer une expression régulière qui va décrire un format où seules les lettres sont autorisées :
+
+let chaine = "cachalot"; // Testez avec des chiffres pour voir la différence
+
+let regex = new RegExp("^[a-z]+$");
+
+let resultat = regex.test(chaine);
+
+console.log(resultat); // Affiche true.
+
+Dans ce code :
+
+    j’ai déclaré une variable chaîne avec un mot ;
+
+    j’ai déclaré un objet RegExp avec le mot-clé new, et je lui ai passé entre parenthèses l’expression régulière qui décrit mon format. 
+
+Au final, cette expression dit : “Nous voulons une chaîne de caractères qui commence et qui finit par un ou plusieurs caractères compris entre a et z.” Revenons en détail sur son  contenu :
+
+    ^  : signifie que la chaîne doit commencer par ce qui suit ;
+
+    [a-z]+  : signifie que la chaîne doit avoir des lettres comprises entre a et z. Le  +  signifie qu’il faut au minimum une seule lettre entre a et z. 
+
+    $  : signifie que la chaîne doit finir par ce qui précède. 
+
+Voici quelques exemples d’expressions régulières simples :
+
+    [a-z]  : une lettre entre a et z ;
+
+    [a-zA-Z]  : une lettre entre a et z ou A et Z ; 
+
+    [a|b]  : une lettre : a ou b, à l’exclusion de toutes les autres ;
+
+    \d  : n’importe quel chiffre ;
+
+    \w  : n’importe quelle lettre ;
+
+    \d{3}  : au moins trois chiffres.
+
+Tous ces éléments peuvent se combiner pour décrire précisément le format que nous voulons tester. N’hésitez pas à consulter la documentation pour en savoir plus !
+
+Et maintenant, passons à la pratique et regardons ensemble comment vérifier une adresse e-mail. 😃
+Définissez une expression régulière pour vérifier une adresse e-mail
+
+Dans cette situation, votre premier réflexe doit être de vous poser la question suivante : qu’est-ce qui caractérise une adresse e-mail ?
+
+    Prenons quelques exemples valides et non valides :
+
+        david@openclassrooms.com : l’adresse est valide. 
+
+        david.pierru@openclassrooms.com : l’adresse est valide.
+
+        david-pierru@open-classrooms.com : l’adresse est valide.
+
+        david.openclassrooms.com : l’adresse n’est pas valide car il manque le @.
+
+        david@openclassrooms : l’adresse n’est pas valide car il manque l'extension. 
+
+Cela fait beaucoup de règles… 😅 Nous allons donc construire notre expression régulière petit à petit. Je vous invite d’ailleurs à utiliser ce site pour y parvenir. Il permet de tester en direct notre expression. 
+
+L’expression que nous allons construire va vérifier le format suivant :
+
+“nom @ fournisseur . extension”. Cela nous fait 5 étapes : une pour le nom, une pour le @, une pour le fournisseur, une pour le point et la dernière pour l’extension.
+Étape 1 : vérifiez le nom
+
+Une adresse e-mail commence par plusieurs lettres ou chiffres. Il est également possible d’avoir des tirets  -  ou des points  .  . Nous pouvons donc commencer par écrire comme expression :
+
+[a-z0-9._-]+
+
+Cela signifie que nous voulons au moins un caractère qui correspond à ce qui est entre crochets. Donc un caractère qui soit :
+
+    une lettre entre a et z ;
+
+    un chiffre entre 0 et 9 ;
+
+    le caractère  .  ;
+
+    le caractère  _  ;
+
+    le caractère  -  .
+
+Étape 2 : vérifiez l’arobase
+
+Ensuite il nous faut un @. Nous écrirons donc :
+
+[a-z0-9._-]+@
+
+Étape 3 : vérifiez le fournisseur
+
+Puis nous avons à nouveau un mot (le fournisseur). Nous écrirons donc :
+
+[a-z0-9._-]+@[a-z0-9._-]+
+
+Étape 4 : vérifiez le point
+
+Le  .  étant utilisé comme symbole dans les expressions régulières, nous devrons l'échapper, c'est-à-dire expliquer à l’interpréteur que ce  .  doit être considéré comme le caractère  .  , et pas interprété.
+
+[a-z0-9._-]+@[a-z0-9._-]+\.
+
+Étape 5 : vérifiez l'extension
+
+Et finalement, nous voulons ajouter l'extension :
+
+[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+
+
+L’expression dans son ensemble signifie donc : un caractère ou plus, suivi d’un @, suivi d’un caractère ou plus, suivi d’un point, suivi d’un caractère ou plus : nous avons nos 5 étapes !
+
+Pas très facile à lire, tout ça… 🤨
+
+Effectivement… Et pourtant cette expression pourrait encore être plus précise. Pour l’instant, un e-mail qui commence par un chiffre est valide, par exemple.
+
+Il n’est pas toujours facile de trouver l’équilibre entre une expression simple, qui peut laisser passer quelques erreurs, et une expression exhaustive mais très compliquée à réaliser. Je vais donc vous donner un dernier conseil pour rédiger vos expressions régulières : utilisez ce site. Il vous permettra de visualiser les expressions générées pour faciliter leur lecture.
+
+La preuve en image ci-dessous :
+Capture d'écran du site Regexper. L'expression régulière est visualisée au milieu d'un écran.
+Le site Regexper vous permet de visualiser l’expression régulière pour tester un e-mail
+Récapitulons en vidéo
+
+Vous pouvez revoir ces démonstrations dans la vidéo ci-dessous :
+À vous de jouer
+
+Notre application contient un formulaire. Mais pour l’instant, rien ne permet de vérifier que les champs sont correctement renseignés avant de lancer l’e-mail. C’est donc tout le but de cet exercice.
+
+Pour ce faire :
+
+    Écrivez une fonction validerNom qui va prendre le nom à tester en paramètre et retourner true si le nom est valide, false sinon.
+
+        La fonction doit prendre le nom en paramètre et valider qu’il est correct. 
+
+        La règle est d’avoir un champ avec au moins deux caractères. 
+
+    Écrivez une fonction validerEmail qui va prendre en paramètre l’e-mail à tester et retourner true si l’e-mail est valide, false sinon. 
+
+    Utilisez ces deux fonctions avec l’événement submit du formulaire. 
+
+    Si les deux champs sont valides, affichez l’e-mail. Sinon, affichez seulement un message d’erreur dans la console. 
+
+Corrigé
+
+Vous pouvez vérifier votre travail en consultant le corrigé et la vidéo ci-dessous :
+En résumé
+
+    Mettez en place des règles de validation pour vous assurer que l’utilisateur a correctement saisi ses données : 
+
+        vérifiez la valeur d’un champ pour les cas simples ;
+
+        définissez des expressions régulières pour les cas plus complexes.
+
+    Vous pouvez tester vos champs : 
+
+        à l’envoi du formulaire grâce à l’événement submit ;
+
+        à la saisie d’un champ du formulaire grâce aux événements input ou change.
+
+    Définissez vos expressions régulières étape par étape en vous aidant des sites ci-dessous : 
+
+        regex101.com pour tester votre expression ;
+
+        Regexper pour visualiser votre expression.

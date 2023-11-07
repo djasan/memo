@@ -1,0 +1,62 @@
+Une boucle est une structure conditionnelle qui permet de répéter un certain nombre de fois du code, jusqu’à ce qu’un test ne soit plus vrai.
+
+const listeMots = ['Cachalot', 'Pétunia', 'Serviette']
+console.log(listeMots[0])
+console.log(listeMots[1])
+console.log(listeMots[2])
+Il  existe deux principaux types de boucles :
+
+    La boucle for permet de répéter du code lorsque l’on sait d’avance combien de fois il faudra le répéter.
+
+Par exemple, si nous voulons demander exactement trois fois à l’utilisateur d’entrer un mot.
+
+    La boucle while permet de répéter du code autant de fois qu’il le faut pour qu’une condition ne soit plus vraie.
+
+Par exemple, si nous voulons redemander un mot à l’utilisateur jusqu’à ce que ce mot soit correct.
+Pour rédiger notre boucle for, nous allons utiliser l’instruction for (“pour”, en anglais). Cette instruction sera suivie d’une condition entre parenthèses dans laquelle on indiquera : 
+
+    le départ de la boucle ;
+
+    au bout de combien de tours la boucle devra s’arrêter.
+
+
+let compteur = 0
+
+compteur < 3
+
+compteur = compteur + 1
+
+compteur = compteur + 1
+À chaque tour de boucle, on fait évoluer la valeur de compteur. Ici, on dit que compteur vaut la valeur précédente de compteur, plus 1.
+
+Au premier tour de boucle, compteur vaut 0, puis 1, puis 2, jusqu’à ce que compteur arrive à 3 (la condition d'arrêt) et là, on sort de la boucle. 
+
+Le bloc de code entre accolades aura donc été exécuté 3 fois avec compteur ayant la valeur 0, puis 1, puis 2.
+
+
+for (let i = 0; i < 3; i++) {
+    console.log(i)
+}
+Grâce à la boucle for, nous avons donc répété du code, de manière à ne pas écrire plusieurs fois la ligne de codeconsole.log() .
+
+
+Utilisez l’instruction while pour répéter du code
+
+La boucle for est utilisée lorsque l'on connaît en amont le nombre de tours à effectuer. Mais cela n’est pas toujours possible ! Dans ce cas, nous utiliserons la boucle while, qui peut s’adapter à tous les cas.
+
+    Reprenons notre exemple de compteur avec un algorithme différent :
+
+    Tant que le compteur n’est pas égal à 3, on augmente le compteur de 1.
+
+Pour rédiger cette boucle while, nous allons utiliser la structure conditionnelle while (“tant que”, en français) qui sera suivie d’une condition entre parenthèses. Cette condition indique le moment où notre boucle doit s’arrêter.
+let i = 0
+while (i < 3) {
+    console.log(i)
+    i++
+}
+    Une boucle est une structure conditionnelle qui permet de répéter du code plusieurs fois.
+
+    La boucle for permet de répéter du code pour un nombre défini de fois.
+
+    La boucle while permet de répéter du code jusqu’à ce qu’une condition ne soit plus remplie.
+

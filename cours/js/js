@@ -1,0 +1,84 @@
+Les instructions sont des mots-clés uniques qui permettent au code d’être correctement interprété. Pour déclarer des variables, vous utiliserez les instructions let et const.
+let monAge = 42
+monAge = 43
+const monPrenom = "David"
+let monAge = 42
+console.log(monAge)
+L’instruction console.log()
+
+Pour vérifier le contenu d’une variable, il est possible d’utiliser l’instruction console.log(), avec entre les parenthèses, le nom de la variable.
+let monAge = 42
+console.log(monAge)
+    Vous pouvez identifier une valeur en lui attribuant un nom grâce à une variable.
+
+    Pour déclarer une variable en JavaScript, vous devez utiliser les instructions : 
+
+        let si la valeur de la variable évolue dans le code ;
+
+        const si la valeur de la variable est constante.
+
+    Utilisez l’instruction console.log(nomDeMaVariable) pour vérifier le contenu d’une variable.
+
+    Le mot-clé var ne doit plus être utilisé. Vous pourrez néanmoins le retrouver dans des codes plus anciens.
+
+    Veillez à bien nommer vos variables : indiquez leur contenu de manière explicite pour rendre votre code lisible pour tout le monde. 
+
+Commençons par manipuler des chiffres avec une opération mathématique simple : l’addition.
+
+Imaginons que vous souhaitiez connaître le nombre d’entrées qu’a fait le film Batman durant les deux premières semaines suivant sa sortie dans un cinéma donné. Il vous faudra additionner le nombre d’entrées de la première semaine avec celui de la deuxième semaine.
+
+const entreesPremiereSemaine = 1000
+const entreesDeuxiemeSemaine = 2000
+const totalEntrees = entreesPremiereSemaine + entreesDeuxiemeSemaine
+
+console.log(totalEntrees)
+let placesDejaVendues = 150
+placesDejaVendues = placesDejaVendues + 10
+
+
+Comme vous pouvez le constater, j’ai répété deux fois placesDejaVendues. Si j’avais écrit placesDejaVendues = 10, cela aurait écrasé la valeur 150 au lieu de réaliser une addition. Comme ce genre d’opération est très fréquent, JavaScript a créé des raccourcis pour les réaliser : les opérateurs d’affectation.
+
+
+
+
+let placesDejaVendues = 150
+
+Pour déclarer une variable qui contient une chaîne de caractères, nous devons entourer notre texte avec des guillemets simples  ‘  ou doubles  “  . Regardez l’exemple ci-dessous :
+
+let monTitre = "Le titre de mon article"
+let monContenu = 'Le contenu de mon article'
+
+
+placesDejaVendues += 10
+
+La concaténation est le fait de mettre bout à bout deux chaînes de caractères. On utilise cette opération quand la chaîne de caractères que l’on souhaite stocker dans une variable est dans deux variables différentes.
+
+
+let premierePartie = "Mon nom est Bond"
+let deuxiemePartie = ", James Bond."
+let punchline = premierePartie + deuxiemePartie
+// punchline vaut “Mon nom est Bond, James Bond.”
+let punchline = "Mon nom est Bond"
+punchline += ", James Bond."
+// punchline vaut “Mon nom est Bond, James Bond.”
+let connexionOk = false
+
+
+Manipulez des booléens
+
+Très souvent, en programmation, vous aurez besoin d'un type de données qui ne peut avoir que 2 possibilités : oui/non, vrai/faux, allumé/éteint. Ainsi, une variable qui contient un booléen ne peut avoir que deux valeurs : true ou false. On utilise ce type de données pour savoir si un état est vrai ou faux dans notre code.
+
+Par exemple, pour savoir si un utilisateur d’un site web est connecté ou pas, on écrira :
+let placesDejaVendues = "150"
+placesDejaVendues += "10"
+console.log(placesDejaVendues)
+
+La variable placesDejaVendues va contenir “15010” et pas “160”, car la présence des guillemets indique à JavaScript que le type de données est “String”, c'est-à-dire du texte. Par conséquent, le  +  n’est plus un opérateur d’addition. Il devient un opérateur de concaténation, qui colle deux morceaux de texte.
+
+Pour résoudre ce problème, nous pouvons soit enlever les guillemets autour des chiffres, soit préciser à JavaScript que nous voulons vraiment utiliser des chiffres, grâce à l’instruction Number. Cette dernière permet de convertir le texte “150” en chiffre 150.
+
+let placesDejaVendues = Number("150")
+placesDejaVendues += Number("10")
+console.log(placesDejaVendues)
+
+

@@ -1,0 +1,332 @@
+<body>
+    <header>
+        <h1>AzerType</h1>
+    </header>
+
+    <main>
+        <div>
+            <h2>Le jeu</h2>
+            <p>Un petit texte</p>
+        </div>
+        <div>
+            <h2>Une autre div</h2>
+            <p>Un autre texte</p>
+        </div>
+    </main>
+
+    <footer>
+        @Copyright : OpenClassrooms.
+    </footer>
+</body>
+
+
+
+
+
+Dans la structure ci-dessus :
+
+    le body en haut représente la racine de l’arbre DOM ;
+
+    de cette racine se déploient des branches (en bleu sur l’image) ;
+
+    ces branches mènent à des nœuds : header, main, footer, h1, h2, div, p… ;
+
+    les branches se terminent généralement par une feuille : texte. 
+
+En développement informatique, on dit que header, main et footer sont les noeuds enfants de body, et que body est le parent de ces nœuds.
+
+Chaque nœud de cet arbre DOM (header, main, div…) est un objet HTMLElement. Pour le dire autrement, JavaScript a regroupé dans un même objet deux choses : 
+
+    les informations sur cet objet (son nom, son id, sa position, etc.) : ce sont les propriétés de l’objet ;
+
+    ce que cet objet est capable de faire (réagir au clic, par exemple) : ce sont les méthodes. 
+
+Dans ce cours, nous explorons plusieurs propriétés et méthodes, mais il en existe d’autres. Si vous voulez en savoir plus, la documentation est à votre disposition. 😃
+Récupérez un élément du DOM
+
+Dans ce chapitre, notre but est de récupérer certains éléments de l’arbre DOM, qui a pour racine la balise body. Cependant, vous vous souvenez peut-être que nos fichiers JavaScript sont stockés dans la balise head, qui se situe avant le body.
+Utilisez defer pour différer l’exécution du script
+
+<script src="scripts/config.js" defer></script>
+<script src="scripts/script.js" defer></script>
+<script src="scripts/main.js" defer></script>
+
+Utilisez différentes syntaxes pour récupérer un élément
+
+JavaScript propose tout un éventail de méthodes pour récupérer les éléments du DOM. Dans ce chapitre, nous en aborderons trois :
+
+    getElementById ;
+
+    querySelector ;
+
+    querySelectorAll.
+
+
+
+La première méthode, et probablement la plus simple, est getElementById. Comme son nom l’indique, elle permet de récupérer un élément en fournissant son id en paramètre.
+
+    Dans notre application par exemple, nous affichions jusqu’à maintenant le mot à recopier dans le texte du prompt. Désormais, notre objectif est de l’afficher dans une zone de la page dédiée.
+
+Pour cela, nous pouvons commencer par créer une div dans le HTML. Pour la distinguer des autres, nous lui fournissons un id :
+
+<body>
+    <div id="zoneProposition">Cachalot</div>
+</body>
+
+let baliseZoneProposition = document.getElementById("zoneProposition");
+console.log(baliseZoneProposition);
+Ici, nous avons demandé à JavaScript, depuis document, donc toute la page : “Trouve-moi un élément HTML qui a pour id zoneProposition”. Puis nous avons mis le résultat dans la variable baliseZoneProposition. 
+
+Quand nous faisons un console.log de cette variable, nous constatons bien le contenu de notre variable baliseZoneProposition, et nous retrouvons bien notre div :
+
+
+
+Pour manipuler le DOM, JavaScript doit ainsi construire une variable globale, document, qui est donc accessible depuis n’importe où dans notre code. Cependant, pour construire cette variable, la page HTML doit être chargée en entier. Or, le script étant lancé dans la balise head, avant que le body ne s’affiche à l’écran, la page HTML n’existe pas encore. Nous devons donc attendre que la page ait fini de charger avant d’utiliser la variable document.
+
+Pour résoudre ce problème, la méthode la plus efficace est d’ajouter le mot-clé defer dans la balise script. Concrètement, cela revient à demander au navigateur “Si tu rencontres la balise script, diffère sa prise en compte et attends que la page soit chargée.”
+
+<script src="scripts/config.js" defer></script>
+
+<script src="scripts/script.js" defer></script>
+
+<script src="scripts/main.js" defer></script>
+
+Utilisez différentes syntaxes pour récupérer un élément
+
+JavaScript propose tout un éventail de méthodes pour récupérer les éléments du DOM. Dans ce chapitre, nous en aborderons trois :
+
+    getElementById ;
+
+    querySelector ;
+
+    querySelectorAll.
+
+Il existe bien sûr d’autres méthodes, et je vous invite d’ailleurs à les découvrir par vous-même. L’essentiel est de choisir la méthode la plus adaptée à la problématique suivante : cibler le ou les éléments qui nous intéressent au milieu d’une page HTML souvent très conséquente. 
+Récupérez un élément avec getElementById
+
+La première méthode, et probablement la plus simple, est getElementById. Comme son nom l’indique, elle permet de récupérer un élément en fournissant son id en paramètre.
+
+    Dans notre application par exemple, nous affichions jusqu’à maintenant le mot à recopier dans le texte du prompt. Désormais, notre objectif est de l’afficher dans une zone de la page dédiée.
+
+Pour cela, nous pouvons commencer par créer une div dans le HTML. Pour la distinguer des autres, nous lui fournissons un id :
+
+<body>
+
+    <div id="zoneProposition">Cachalot</div>
+
+</body>
+
+Pour accéder à cette balise, nous allons donc écrire :
+
+let baliseZoneProposition = document.getElementById("zoneProposition");
+
+console.log(baliseZoneProposition);
+
+Ici, nous avons demandé à JavaScript, depuis document, donc toute la page : “Trouve-moi un élément HTML qui a pour id zoneProposition”. Puis nous avons mis le résultat dans la variable baliseZoneProposition. 
+
+Quand nous faisons un console.log de cette variable, nous constatons bien le contenu de notre variable baliseZoneProposition, et nous retrouvons bien notre div :
+À gauche de la capture d'écran : un petit triangle à côté d'une div.
+Résultat d’un getElementById dans la console
+
+Cette variable est un objet de type HTMLElement. Si nous cliquons sur le petit triangle à côté de cette div pour déployer le contenu, les détails de cet objet HTMLElement vont s’afficher, comme dans la capture d’écran ci-dessous.
+Les détails de la div id= sont affichées sur la capture d'écran (20 lignes).
+Détail d’un objet HTMLElement
+
+Ah oui…. Ca fait beaucoup d'informations, tout ça !
+
+Eh oui… JavaScript propose beaucoup de propriétés et de méthodes sur les objets HTLMElement. Pour vous, ce sont autant d’opportunités d’aller les piocher en fonction de vos besoins !
+
+Enfin, comme pour n’importe quel objet en JavaScript, vous pouvez accéder aux propriétés de votre nœud grâce au point “.” .
+
+    Par exemple, pour afficher la hauteur de l’élément dans votre console, vous pouvez écrire :
+
+console.log(baliseZoneProposition.clientHeight);
+
+Récupérez un élément QuerySelector
+
+Lorsqu’on a un id sur nos éléments, document.getElementById est une bonne option pour les récupérer. Malheureusement, il arrive régulièrement que ça ne soit pas le cas !
+
+JavaScript a donné une réponse particulièrement intuitive à ce problème : utiliser les sélecteurs CSS. En gros, si vous savez désigner un élément en CSS, alors il vous suffit de reprendre exactement la même syntaxe ! 😃
+
+    Modifions légèrement le contenu de notre page HTML pour illustrer cela :
+
+<body>
+
+    <div id="zoneProposition">
+
+        Entrez le mot : <span>Cachalot</span>
+
+    </div>
+
+</body>
+
+Pour mettre le mot Cachalot en gras en CSS, nous aurions écrit :
+
+#zoneProposition span {
+
+    font-weight: bold;
+
+}
+
+Ce code signifie : “Il faut mettre la police d’écriture en gras pour tous les span contenus dans un élément qui a l’id zoneProposition.”
+
+querySelector nous permet de trouver le premier élément qui correspond au sélecteur CSS proposé :
+
+let baliseZonePropositionSpan = document.querySelector("#zoneProposition span");
+
+console.log(baliseZonePropositionSpan);
+
+Et voilà le résultat dans la capture d’écran ci-dessous : nous voyons dans la console que nous avons bien trouvé notre span.
+Capture d'écran. Sous l'onglet Console, s'affiche à droite d'un petit triangle.
+Résultat de la récupération d’une balise avec querySelector
+
+Notez que  #  est présent devant l’id, comme on l’écrirait en CSS, alors que ce  #  n’était pas nécessaire avec getElementById.
+Récupérez plusieurs éléments avec QuerySelectorAll
+
+Ici, le principe est le même que pour tous les éléments dans une liste de type NodeList (ou liste de nœuds, en français).
+
+Modifions à nouveau notre body :
+
+<body>
+
+    <div class="zoneChoix">
+
+        <input type="radio" name="optionSource" id="mots" value="1" checked>
+
+        <label for="mots">Mots</label>
+
+        <input type="radio" name="optionSource" id="phrases" value="2">
+
+        <label for="phrases">Phrases</label>
+
+    </div>
+
+    <div class="zoneProposition">
+
+        Entrez le mot : <span>Cachalot</span>
+
+    </div>
+
+
+</body>
+
+Dans ce code, j’ai ajouté une nouvelle div avec la classe zoneChoix. Cette div contient deux inputs de type radio.
+
+Pour récupérer tous les inputs de type radio d’un seul coup, je peux donc écrire :
+
+let listeInputRadio = document.querySelectorAll(".zoneChoix input");
+
+console.log(listeInputRadio);
+
+Notez que j’ai écrit .zoneChoix et pas #, car ici, j’ai mis une classe à ma div et pas un id.
+
+Et voici le résultat : nous obtenons une NodeList.
+Sous l'onglet Console, la NodeList s'affiche à droite d'un petit triangle.
+Résultat du querySelectorAll : une NodeList
+
+Nous voyons bien ici notre NodeList. Pour reprendre l’image de l’arbre DOM, JavaScript a sélectionné dans cet arbre les nœuds qui correspondent à notre sélecteur CSS.
+
+Nous allons devoir parcourir les différents éléments de cette liste un par un pour y accéder. Nous utiliserons donc une boucle :
+
+for (let i = 0; i < listeInputRadio.length; i++) {
+
+    console.log(listeInputRadio[i]);
+
+}
+
+Et voilà le résultat, nous retrouvons bien le détail de tous nos éléments :
+Capture d'écran affichant deux lignes qui détaillent les éléments.
+Résultat de la boucle qui parcourt les éléments d’une NodeListe
+Récapitulons en vidéo
+
+Retrouvez les démonstrations de ce chapitre dans la vidéo ci-dessous :
+À vous de jouer !
+
+Dans cet exercice, je vous propose de récupérer plusieurs éléments dont nous aurons besoin dans le chapitre suivant, lorsque nous procéderons à la modification de la page.
+
+Comme j’aime vous faciliter la vie, j’ai modifié légèrement le projet et réalisé la partie HTML/CSS pour cet exercice. Vous la trouverez ici.
+
+Dans le fichier main.js :
+
+    Sélectionnez avec la méthode getElementById : 
+
+        l’input dans lequel le joueur va écrire son texte ; 
+
+        le bouton de validation.
+
+    Sélectionnez avec la méthode querySelector : 
+
+        l’endroit où le mot proposé sera affiché ;
+
+        l’endroit où le score sera affiché. 
+
+    Sélectionnez avec la méthode querySelectorAll : 
+
+        les boutons radio de choix. 
+
+N’oubliez pas de vérifier que la sélection est correcte à chaque fois, en utilisant un console.log !
+Corrigé
+
+Vous pouvez vérifier votre travail en consultant le corrigé et la vidéo ci-dessous : 
+En résumé
+
+    Une page web est constituée de balises HTML, et repose sur une structure que l’on appelle DOM. Cette structure permet de relier les balises entre elles.
+
+    Pour récupérer un élément du DOM :
+
+        utilisez defer dans l’inclusion de vos fichiers JS pour retarder leur prise en compte, afin que la variable document ait le temps d’être créée ; 
+
+        partez du point d’entrée du DOM : la variable document ;
+
+        utilisez les méthodes adaptées : getElementById, querySelector ou querySelectorAll.
+Par exemple, pour afficher la hauteur de l’élément dans votre console, vous pouvez écrire :
+
+console.log(baliseZoneProposition.clientHeight);
+
+<body>
+    <div id="zoneProposition">
+        Entrez le mot : <span>Cachalot</span>
+    </div>
+</body>
+#zoneProposition span {
+    font-weight: bold;
+}
+
+querySelector nous permet de trouver le premier élément qui correspond au sélecteur CSS proposé :
+let baliseZonePropositionSpan = document.querySelector("#zoneProposition span");
+console.log(baliseZonePropositionSpan);
+
+  Ici, le principe est le même que pour tous les éléments dans une liste de type NodeList (ou liste de nœuds, en français).
+
+Modifions à nouveau notre body :
+
+<body>
+    <div class="zoneChoix">
+        <input type="radio" name="optionSource" id="mots" value="1" checked>
+        <label for="mots">Mots</label>
+        <input type="radio" name="optionSource" id="phrases" value="2">
+        <label for="phrases">Phrases</label>
+    </div>
+    <div class="zoneProposition">
+        Entrez le mot : <span>Cachalot</span>
+    </div>
+
+</body>
+une nouvelle div avec la classe zoneChoix. Cette div contient deux inputs de type radio.
+
+Pour récupérer tous les inputs de type radio d’un seul coup, je peux donc écrire :
+
+let listeInputRadio = document.querySelectorAll(".zoneChoix input");
+console.log(listeInputRadio);
+
+
+zoneChoix et pas #, car ici, j’ai mis une classe à ma div et pas un id.
+
+Et voici le résultat : nous obtenons une NodeList.
+Nous voyons bien ici notre NodeList. Pour reprendre l’image de l’arbre DOM, JavaScript a sélectionné dans cet arbre les nœuds qui correspondent à notre sélecteur CSS.
+
+Nous allons devoir parcourir les différents éléments de cette liste un par un pour y accéder. Nous utiliserons donc une boucle :
+for (let i = 0; i < listeInputRadio.length; i++) {
+    console.log(listeInputRadio[i]);
+}
+

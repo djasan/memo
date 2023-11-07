@@ -1,0 +1,174 @@
+@media screen and (max-width: 1200px) {
+/* Insérez vos propriétés CSS ici, avec vos sélecteurs*/
+}
+
+Les tailles que nous indiquons avec  min-width  ou  max-width  sont souvent appelées "points de ruptures", ou breakpoints en anglais, car ce sont les points où le design change.Attention, afin que les Media Queries soient prises en compte correctement sur tous les dispositifs, il est également essentiel de rajouter dans l’en-tête (partie  <head>  de notre site) la ligne suivante :
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+Ici on demande a ce que le "viewport" du navigateur, c’est à dire la surface d’affichage du navigateur s’adapte à la largeur d’affichage de l’appareil. Cela permet notamment un affichage correct sur nos téléphones mobiles.
+
+En effet les téléphones actuels ont une résolution native proche des écrans HD. Par exemple un iPhone 12Pro a une résolution native de 1 170 x 2 532 pixels. Si nous ne mettons pas la balise meta viewport, l’affichage de notre site serait le même que sur un écran de cette taille, donc on y verrait pas grand chose. Par contre avec cette balise l’affichage se fait sur une base de 390 x 844 pixels. Cela permet donc d’assurer un affichage standard sur tous les mobiles.
+Utilisez les règles disponibles
+
+Il existe de nombreuses règles permettant de construire des media queries. Mais pour ne pas vous perdre, je vous ai uniquement listé les plus utilisées :
+
+    height  : hauteur de la zone d'affichage (fenêtre) ;
+
+    width  : largeur de la zone d'affichage (fenêtre) ;
+
+    orientation  : orientation du périphérique (portrait ou paysage) ;
+
+    media  : type d'écran de sortie. Avec la valeur la plus utilisée :
+
+        screen  : écran “classique”,
+
+        all  : tout type de média,
+
+        print  : imprimante (pratique pour formater un contenu pour l’imprimer).
+
+On peut rajouter le préfixe  min-  ou  max-  devant la plupart de ces règles. Ainsi,  min-width  signifie “largeur minimale”, max-height  signifie “hauteur maximale”, etc.
+
+Les règles peuvent être combinées à l'aide des mots suivants:
+
+    only  : “uniquement” ;
+
+    and  : “et” ;
+
+    not   : “non”.
+
+Voici quelques exemples de media queries pour vous aider à bien comprendre le principe :
+
+/* Sur les écrans, quand la largeur de la fenêtre fait au maximum 1280px */
+
+@media screen and (max-width: 1280px)
+
+/* Sur tous types d'écran, quand la largeur de la fenêtre est comprise entre 1024px et 1280px */
+
+@media all and (min-width: 1024px) and (max-width: 1280px)
+
+/* Sur tous types d'écrans orientés verticalement */
+
+@media all and (orientation: portrait)
+
+Les media queries sont surtout utilisées pour adapter le design du site aux différentes largeurs d'écran.
+
+Faisons un test tout simple : nous allons changer la couleur et la taille du texte selon que la fenêtre fait plus ou moins de 1 024 pixels de large :
+
+/* Paragraphes en bleu par défaut */
+
+p {
+
+    color: blue;
+
+}
+
+/* Nouvelles règles si la fenêtre fait au plus 1024px de large */
+
+@media screen and (max-width: 1024px) {
+
+    p {
+
+        color: red; 
+
+        background-color: black;
+
+        font-size: 1.2em;
+
+    }
+
+}
+
+Dans notre feuille CSS, nous avons d'abord demandé à ce que le texte des paragraphes soit écrit en bleu ; jusque-là, rien de nouveau. En revanche, nous avons ajouté une media query qui s'applique à tous les écrans dont la largeur ne dépasse pas  1024px  . À l'intérieur, nous avons appliqué des règles CSS sur les paragraphes pour les écrire plus gros et en rouge.
+
+Résultat : la page n'a pas la même apparence selon la taille de la fenêtre. Essayez de la redimensionner, pour voir !
+Codez des interfaces responsives
+
+Maintenant que vous savez comment sélectionner des éléments en fonction des différentes tailles d'écran, vous allez également pouvoir tirer profit des différentes astuces pour adapter votre contenu.
+Exploitez les minimum et maximum
+
+On peut demander à ce qu'un bloc ait des dimensions minimales et maximales. C'est très pratique, car cela nous permet de définir des dimensions “limites” pour que notre site s'adapte aux différentes résolutions d'écran de nos visiteurs :
+
+    min-width : largeur minimale ;
+
+    min-height : hauteur minimale ;
+
+    max-width : largeur maximale ;
+
+    max-height : hauteur maximale.
+
+Par exemple, on peut demander à ce qu'une image occupe  50%  de la largeur et exiger qu'elle fasse au moins 400 pixels de large dans tous les cas :
+
+img {
+
+    width: 50%;
+
+    min-width: 400px;
+
+}
+
+Observez le résultat en modifiant la largeur de la fenêtre de votre navigateur. Vous allez voir que, si celle-ci est trop petite, le paragraphe se force à occuper au moins 400 pixels de largeur.
+Coupez ce qui dépasse avec  overflow
+
+Lorsqu'on commence à définir des dimensions précises pour nos blocs, comme on vient de le faire, il arrive qu'ils deviennent trop petits pour le texte qu'ils contiennent.
+
+Les propriétés CSS que nous allons voir ici ont justement été créées pour contrôler les dépassements… et décider quoi faire si jamais cela devait arriver.
+
+Supposons que vous ayez un long paragraphe et que vous vouliez (pour une raison qui ne regarde que vous) qu'il fasse  250px  de large et  110px  de haut. Ajoutons-lui une bordure et remplissons-le de texte… à ras bord :
+
+p {
+
+    width: 250px;
+
+    height: 110px;
+
+    text-align: justify;
+
+    border: 1px solid black;
+
+}
+
+Et voilà ce que ça donne :
+Un long paragraphe en lorem ipsum permet de voir qu'il déborde du cadre qu'on lui a fixé, c'est-à-dire une largeur de 250 pixels et une hauteur de 110 pixels. Visuellement, le bloc est délimité par une bordure, mais le texte continue après le bloc.
+Le texte dépasse du bloc de paragraphe
+
+Horreur ! Le texte dépasse des limites du paragraphe !
+
+Eh oui ! Vous avez demandé des dimensions précises, vous les avez eues ! Mais… le texte ne tient pas à l'intérieur d'un si petit bloc.
+
+Si vous voulez que le texte ne dépasse pas les limites du paragraphe, il va falloir utiliser la propriété CSS overflow. Voici les valeurs qu'elle peut accepter :
+
+    visible  (par défaut) : si le texte dépasse les limites de taille, il reste visible et sort volontairement du bloc ;
+
+    hidden : si le texte dépasse les limites, il sera tout simplement caché. On ne pourra pas voir tout le texte ;
+
+    scroll : là encore, le texte sera caché s'il dépasse les limites. Sauf que cette fois, le navigateur mettra en place des barres de défilement pour qu'on puisse lire l'ensemble du texte. C'est un peu comme un cadre à l'intérieur de la page ;
+
+    auto : c'est le mode “pilote automatique”. En gros, c'est le navigateur qui décide de mettre ou non des barres de défilement (il n'en mettra que si c'est nécessaire). C'est la valeur que je conseille d'utiliser le plus souvent.
+
+Avec  overflow: hidden;  le texte est donc coupé (on ne peut pas voir la suite) :
+On ne peut pas lire la suite du paragraphe au-delà des limites du bloc. Seul le texte qui peut rentrer à l'intérieur du bloc est lisible, la suite est coupée.
+Le texte est coupé aux limites du paragraphe
+
+Essayons maintenant  overflow: auto;  avec le code CSS suivant :
+
+p {
+
+    width: 250px;
+
+    height: 110px;
+
+    text-align: justify;
+
+    overflow: auto;
+
+}
+
+Ce qui donne :
+Le bloc fait toujours la même taille et le texte ne dépasse pas. On peut tout de même le lire en entier car on peut faire défiler le texte à l'intérieur du bloc.
+Le texte peut maintenant défiler
+
+Vous pouvez manipuler ce bout de code dans le CodePen P4C4.
+
+Dans le cas spécifique du texte, vous pouvez même utiliser  text-overflow: ellipsis;  combiné à  white-space: no-wrap;  : ils vous permettent d'afficher "..." à la fin de votre texte pour signaler à l'utilisateur que le texte a été tronqué (e vous laisse jeter un œil à la documentation sur ce lien).
+Le texte défile grâce à une barre de défilement qui s'affiche sur le côté droit du bloc.
+Il y a une barre de défilement

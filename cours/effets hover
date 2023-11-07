@@ -1,0 +1,45 @@
+a:active {
+    background-color: #C1FFD7;
+}
+
+.mon-element:hover {
+    background-color: #BEAEE2;
+    color: white;
+}
+
+h1:hover {
+    color: #CDF0EA;
+}
+
+p:hover {
+    color: #F9CEEE;
+}
+
+a:focus {
+    background-color: #FCFFA6;
+}
+
+a:visited {
+    color: black;
+}
+
+a[title] {
+/* Insérez ici votre style */
+}
+
+
+<a href="http://site.com" title="Infobulle">
+
+
+a[title="Cliquez ici"] {
+/* Insérez ici votre style */
+}
+
+<a href="http://site.com" title="Cliquez ici">
+
+a[title*="ici"] {
+/* Insérez ici votre style */
+}
+
+
+<a href="http://site.com" title="Quelque part par ici">
