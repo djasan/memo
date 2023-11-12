@@ -1,0 +1,33 @@
+<nav>
+    <ul>
+        <li>
+            <a href="#">Nouveautés</a>
+        </li>
+        <li>
+            <a href="#">Anti-gaspi</a>
+        </li>
+        <li>
+            <a href="#">Origine France</a>
+        </li>
+        <li>
+            <a href="#">Marque La Fourche</a>
+        </li>
+    </ul>
+</nav>
+Utilisez la balise  <main>  pour le contenu principal de la page
+
+La balise <main> permet de déclarer le contenu principal de votre page. Elle englobe la majeure partie du  <body>  d'une page, en excluant les autres éléments tels que le  <header>, le  <footer>  et de potentiels  <aside>. La balise <main> doit être unique : il n'y en a qu'une seule par page :
+
+<main>
+
+</main>
+
+Utilisez des balises  <section>  pour structurer le contenu du  <main>
+
+La balise <section>  sert à regrouper des contenus en fonction de leur thématique. Elle englobe généralement une portion du contenu au centre de la page.
+
+<section>
+
+</section>
+
+Sur la page d'accueil du site de La Fourche, on trouve plusieurs blocs qui pourraient être considérés comme des sections de page :

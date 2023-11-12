@@ -1,0 +1,105 @@
+<div class="container">
+<div class="element element1">Élément 1</div>
+<div class="element element2">Élément 2</div>
+<div class="element element3">Élément 3</div>
+</div>
+
+.container {
+    display: flex;
+}
+
+    row  : organisés sur une ligne (par défaut) ;
+
+    column  : organisés sur une colonne ;
+
+    row-reverse  : organisés sur une ligne, mais en ordre inversé ;
+
+    column-reverse  : organisés sur une colonne, mais en ordre inversé.
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+
+Retournez à la ligne avec la propriété  flex-wrap
+
+
+
+    nowrap  : pas de retour à la ligne (par défaut) ;
+
+    wrap  : les éléments vont à la ligne lorsqu'il n'y a plus la place ;
+
+    wrap-reverse  : les éléments vont à la ligne, lorsqu'il n'y a plus la place, en sens inverse.
+
+
+.container {
+    display: flex;
+    flex-wrap: nowrap; 
+    /* OU wrap;
+    OU wrap-reverse; */
+}
+
+Pour changer leur alignement, on va utiliser justify-content, qui peut prendre ces valeurs :
+
+    flex-start: alignés au début (par défaut) ;
+
+    flex-end: alignés à la fin ;
+
+    center: alignés au centre ;
+
+    space-between: les éléments sont étirés sur tout l'axe (il y a de l'espace entre eux) ;
+
+    space-around: idem, les éléments sont étirés sur tout l'axe, mais ils laissent aussi de l'espace sur les extrémités.
+.container {
+    display: flex;
+    justify-content: flex-start /* OU flex-end
+    OU center
+    OU space-between
+    OU space-around; */
+}
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 350px; /* Un peu de hauteur pour que les éléments aient la place de bouger */
+}
+Si nos éléments sont placés dans une direction horizontale (ligne), l'axe secondaire est... vertical. Et inversement : si nos éléments sont dans une direction verticale (colonne), l'axe secondaire est horizontal.
+
+La propriété align-items  permet de changer leur alignement sur l'axe secondaire, grâce aux valeurs :
+
+    stretch: les éléments sont étirés sur tout l'axe (valeur par défaut) ;
+
+    flex-start: alignés au début ;
+
+    flex-end: alignés à la fin ;
+
+    center: alignés au centre ;
+
+    baseline: alignés sur la ligne de base (semblable à  flex-start  ).
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    display: flex;
+}
+
+.element {
+    margin: auto;
+}

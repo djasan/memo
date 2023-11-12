@@ -1,0 +1,112 @@
+<table>
+    <tr>
+        <td>Carmen</td>
+        <td>33 ans</td>
+        <td>Espagne</td>
+    </tr>
+    <tr>
+        <td>Michelle</td>
+        <td>26 ans</td>
+        <td>États-Unis</td>
+    </tr>
+</table>
+td /* Toutes les cellules des tableaux... */
+{
+    border: 1px solid black; /* auront une bordure de 1px */
+}
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+}
+
+Collez les bordures du tableau HTML avec la propriété CSS  border-collapse
+
+border-collapse est une propriété CSS qui permet de “coller les bordures entre elles”. Elle peut prendre deux valeurs :
+
+    collapse  : les bordures seront collées entre elles, c'est l'effet qu'on recherche ici ;
+
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Âge</th>
+        <th>Pays</th>
+    </tr>
+    <tr>
+        <td>Carmen</td>
+        <td>33 ans</td>
+        <td>Espagne</td>
+    </tr>
+    <tr>
+        <td>Michelle</td>
+        <td>26 ans</td>
+        <td>États-Unis</td>
+    </tr>
+</table>
+
+
+table {
+    border-collapse: collapse;
+}
+
+td, th /* Mettre une bordure sur les td ET les th */ {
+    border: 1px solid black;
+}
+<caption> pour ajouter un titre à notre tableau  !
+
+Cette balise se place tout au début du tableau, juste avant l'en-tête. C'est elle qui contient le titre du tableau :
+
+<table>
+    <caption>Passagers du vol 377</caption>
+    <tr>
+        <th>Nom</th>
+        <th>Âge</th>
+        <th>Pays</th>
+    </tr>
+    <tr>
+        <td>Carmen</td>
+        <td>33 ans</td>
+        <td>Espagne</td>
+    </tr>
+    <tr>
+        <td>Michelle</td>
+        <td>26 ans</td>
+        <td>États-Unis</td>
+    </tr>
+</table>
+
+td, th {
+    border: 1px solid black;
+    padding: 15px;
+}
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+    l'en-tête du tableau (en haut) se définit avec les balises <thead></thead>  
+
+    le corps du tableau (au centre) se définit avec les balises <tbody></tbody>  
+
+    le pied du tableau (en bas) se définit avec les balises <tfoot></tfoot>
+
+Fusionnez des cellules du tableau avec les attributs colspan et rowspan
+
+Pour fusionner des cellules entre elles, il suffit d'ajouter un attribut dans la balise HTML <td>. Cela permet d'indiquer le nombre de cellules à fusionner entre elles (la balise des cellules).
+
+II existe deux attributs pour deux types de fusions différentes :
+
+    l'attribut  colspan  permet de fusionner des colonnes : la fusion s'effectue horizontalement, aussi bien sur les lignes d'en-tête que sur le contenu lui-même. 
+
+    l'attribut  rowspan  permet de fusionner des lignes : là, deux lignes seront groupées entre elles. La fusion s'effectuera verticalement.
+
+Voyons tout de suite à quoi cela peut ressembler :
+
+
+
+
+
+
+    separate  : les bordures seront dissociées (valeur par défaut).
